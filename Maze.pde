@@ -11,32 +11,22 @@ class Maze {
     this.cellSize = cellSize;
 
     hWalls = new boolean[rows + 1][cols];
-    for (int i = 0; i <= rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        hWalls[i][j] = true;
-      }
-    }
-
     vWalls = new boolean[rows][cols + 1];
-    for (int i = 0; i < rows; i++) {
+    for (int i = 0; i <= rows; i++) {
       for (int j = 0; j <= cols; j++) {
-        vWalls[i][j] = true;
+        if (j < cols) hWalls[i][j] = true;
+        if (i < rows) vWalls[i][j] = true;
       }
     }
   }
 
   void display() {
     for (int i = 0; i <= rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        if (hWalls[i][j]) {
+      for (int j = 0; j <= cols; j++) {
+        if (j < cols && hWalls[i][j]) {
           line(xCell(j), yCell(i), xCell(j + 1), yCell(i));
         }
-      }
-    }
-
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j <= cols; j++) {
-        if (vWalls[i][j]) {
+        if (i < rows && vWalls[i][j]) {
           line(xCell(j), yCell(i), xCell(j), yCell(i + 1));
         }
       }
